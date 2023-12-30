@@ -1,10 +1,11 @@
 const express = require("express");
 const routesClient = require("./routes/client/index.route.js");
-const port = require("dotenv");
+const dotenv = require("dotenv");
 
+dotenv.config();
 const app = express();
-
-const port = 3000; //Tránh để lộ vì bảo mật
+//const port = 3000; //Tránh để lộ vì bảo mật
+const port = process.env.PORT;
 
 //Thiết lập xử lý các view
 app.set("views", "./views");
