@@ -1,7 +1,9 @@
 // Chứa những hàm controller của trang product
 // [GET] /product/
 module.exports.index = (request, response) => {
-    response.render("./client/pages/products/index.pug");
+    response.render("./client/pages/products/index.pug", {
+        title: "Trang danh sách sản phẩm"
+    });
 }
 
 // [GET] /product/detail
