@@ -1,12 +1,7 @@
 const express = require("express");
-
 const router = express.Router();
+const homeController = require("../../controllers/client/home.controller.js");
 
-
-router.get("/", (request, response) => {
-    //Gửi một chuỗi lên trang chủ
-    // response.send("Trang chủ danh sách sản phẩm");
-    response.render("./client/pages/home/index.pug");
-});
+router.get("/", homeController.index);
 
 module.exports = router; //Tạo một export

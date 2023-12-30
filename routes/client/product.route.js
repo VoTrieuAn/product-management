@@ -1,23 +1,13 @@
 const express = require("express");
-
 const router = express.Router();
+const productController = require("../../controllers/client/product.controller.js");
 
+router.get("/", productController.index);
 
-router.get("/", (request, response) => {
-    // response.send("Trang danh sách sản phẩm");
-    response.render("./client/pages/products/index.pug");
-});
+router.get("/detail", productController.detail);
 
-// router.get("/detail", (request, response) => {
-//     response.send("Chi tiết sản phẩm");
-// });
+router.get("/edit", productController.edit);
 
-// router.get("/edit", (request, response) => {
-//     response.send("Trang chỉnh sửa sản phẩm");
-// });
-
-// router.get("/create", (request, response) => {
-//     response.send("Trang thêm mới sản phẩm");
-// });
+router.get("/create", productController.create);
 
 module.exports = router; //Tạo một export
