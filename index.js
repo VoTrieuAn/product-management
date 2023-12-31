@@ -10,7 +10,8 @@ const port = process.env.PORT;
 //Thiết lập xử lý các view
 app.set("views", "./views");
 app.set("view engine", "pug");
-
+//nhúng file tĩnh public
+app.use(express.static("public"));
 //Nhúng vòa đây routesClient vòa
 routesClient(app);
 
