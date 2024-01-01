@@ -4,10 +4,10 @@ const productController = require("../../controllers/client/product.controller.j
 
 router.get("/", productController.index);
 
-router.get("/detail", productController.detail);
+// router.get("/detail", productController.detail);
 
-router.get("/edit", productController.edit);
+// router.get("/edit", productController.edit);
 
-router.get("/create", productController.create);
+// router.get("/create", productController.create);
 
 module.exports = router; //Tạo một export
