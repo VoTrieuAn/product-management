@@ -1,5 +1,6 @@
 const express = require("express");
 const routesClient = require("./routes/client/index.route.js");
+const routesAdmin = require("./routes/admin/index.route.js");
 const dotenv = require("dotenv");
 //Khởi tạo dotenv
 dotenv.config();
@@ -20,6 +21,7 @@ app.set("view engine", "pug");
 app.use(express.static("public"));
 //Nhúng vòa đây routesClient vòa
 routesClient(app);
+routesAdmin(app);
 
 app.listen(port, () => {
     console.log(`App listening on port: ${port}`);
