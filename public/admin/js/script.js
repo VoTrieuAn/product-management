@@ -18,3 +18,24 @@ if(buttonStatus.length > 0) {
     })
 }
 // End button status
+
+// From search
+const formSearch = document.querySelector("#form-search");
+
+if(formSearch) {
+    let url = new URL(window.location.href);
+
+    formSearch.addEventListener("submit", (event) => {
+
+        event.preventDefault(); //Ngăn chặn hành vi mặc định (ở đây là load lại trang)
+        const keyword = event.target.elements.keyword.value;
+        if(keyword) {
+            url.searchParams.set("keyword", keyword);
+        } else {
+            url.searchParams.delete("keyword");
+        }
+        window.location.href = url.href;
+    });
+}
+
+// End form search

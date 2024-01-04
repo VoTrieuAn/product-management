@@ -29,7 +29,7 @@ module.exports.index = async (request, response) => {
     } else {
         filterState[0].class="active"
     }
-    console.log(filterState);
+    // console.log(filterState);
     const find = {
         deleted: false,
     }
@@ -38,11 +38,20 @@ module.exports.index = async (request, response) => {
         find.status = checkStatus;
     }
 
+    // Search
+    const checkSearch = request.query.keyword;
+    if(checkSearch) {
+        const regex = new RegExp(checkSearch, "i"); // "i" Tìm kiếm không quan tâm đến chữ hoa thường
+        find.title = regex;
+    }
+    //End search
+
     const products = await Product.find(find);
  
     response.render("admin/pages/products/index", {
         pageTitle: "Danh sách sản phẩm",
         products: products,
-        filterState: filterState
+        filterState: filterState,
+        keyword: checkSearch
     });
 }
