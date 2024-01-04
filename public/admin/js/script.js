@@ -39,3 +39,18 @@ if(formSearch) {
 }
 
 // End form search
+
+// Pagination
+const buttonPagination = document.querySelectorAll("[button-pagination]");
+// Nó sẽ trả ra mảng rỗng nếu không có phần tử nào
+if(buttonPagination.length > 0) {
+    let url = new URL(window.location.href);
+    buttonPagination.forEach(button => {
+        button.addEventListener("click", () => {
+            const page = button.getAttribute("button-pagination"); //Lấy ra số trang hiện tại
+            url.searchParams.set("page", page);
+            window.location.href = url.href;
+        });
+    });
+}
+// End pagination
