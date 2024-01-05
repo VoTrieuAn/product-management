@@ -2,6 +2,7 @@ const express = require("express");
 const routesClient = require("./routes/client/index.route.js");
 const routesAdmin = require("./routes/admin/index.route.js");
 const dotenv = require("dotenv");
+const methodOverride = require("method-override");
 const systemConfig = require("./config/system.js");
 //Khởi tạo dotenv
 dotenv.config();
@@ -11,8 +12,11 @@ const database = require("./config/database.js");
 database.connect();
 //Kết thúc kết nối cơ sở dữ liệu
 const app = express();
+
 //const port = 3000; //Tránh để lộ vì bảo mật
 const port = process.env.PORT;
+//Method override
+app.use(methodOverride('_method'));
 //Nhúng mongoose vào
 
 //Thiết lập xử lý các view

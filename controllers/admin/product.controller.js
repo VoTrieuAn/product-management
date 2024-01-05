@@ -2,6 +2,7 @@ const Product = require("../../models/product.model");
 const filterStateHelper = require("../../helpers/filter-state.helper.js");
 const paginationHelper = require("../../helpers/pagination.helper.js");
 const systemConfig= require("../../config/system.js");
+const { request, response } = require("express");
 
 // [GET] /admin/products/
 module.exports.index = async (request, response) => {
@@ -49,4 +50,18 @@ module.exports.index = async (request, response) => {
         response.redirect(`/${systemConfig.prefixAdmin}/products`); //Chuyển hướng đến trang được truyền vào
     }
 
+}
+
+// [PATCH] /admin/products/change-status/:status/:id
+module.exports.changeStatus = async (request, response) => {
+    console.log(request.params);
+    const status = request.params.status; //
+    const id = request.params.id;
+    
+    await Product.updateOne({
+        _id: id
+    }, {
+        status: status
+    });
+    response.redirect(`/${systemConfig.prefixAdmin}/products`); //Back về lại trang trước hoặc trang mình quy định
 }
