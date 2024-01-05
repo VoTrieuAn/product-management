@@ -65,3 +65,22 @@ module.exports.changeStatus = async (request, response) => {
     });
     response.redirect(`/${systemConfig.prefixAdmin}/products`); //Back về lại trang trước hoặc trang mình quy định
 }
+
+// [PATCH] /admin/products/change-multi
+module.exports.changeMulti = async (request, response) => {
+    const type = request.body.type;
+    const ids = request.body.ids.split(", ");
+    switch(type) {
+        case "active":
+        case "inactive":
+            await Product.updateMany({
+                _id: {$in: ids} //Tìm ra các id có id nằm bên trong mảng ids
+            }, {
+                status: type
+            });
+            break;
+        default:
+            break;
+    }
+    response.redirect("back");
+}

@@ -9,4 +9,9 @@ router.patch(
     "/change-status/:status/:id", // ":key" là tạo một route động còn gọi là params
     productController.changeStatus
 );
+
+router.patch(
+    "/change-multi",
+    productController.changeMulti
+);
 module.exports = router; //Tạo một export

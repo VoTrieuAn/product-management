@@ -4,6 +4,7 @@ const routesAdmin = require("./routes/admin/index.route.js");
 const dotenv = require("dotenv");
 const methodOverride = require("method-override");
 const systemConfig = require("./config/system.js");
+const bodyParser = require('body-parser');
 //Khởi tạo dotenv
 dotenv.config();
 //Kết thúc khởi tạo
@@ -17,7 +18,10 @@ const app = express();
 const port = process.env.PORT;
 //Method override
 app.use(methodOverride('_method'));
-//Nhúng mongoose vào
+//Nhúng vào
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+//Kết thúc nhúng
 
 //Thiết lập xử lý các view
 app.set("views", "./views");

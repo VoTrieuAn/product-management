@@ -75,3 +75,64 @@ if(buttonChangeStatus.length > 0) {
     });
 }
 // End button-change-status
+
+// Checkbox-multi
+const checkboxMulti = document.querySelector("[checkbox-multi]");
+console.log(checkboxMulti);
+if(checkboxMulti) {
+    const inputCheckAll = checkboxMulti.querySelector("input[name='checkall']");
+    const inputId = checkboxMulti.querySelectorAll("input[name='id']");
+    console.log(inputCheckAll);
+    console.log(inputId);
+
+    inputCheckAll.addEventListener("click", () => {
+        if(inputCheckAll.checked) { //Trả ra true nếu đã kích vào ngược lại là false
+            inputId.forEach(input => {
+                input.checked = true; 
+            });
+        } else {
+            inputId.forEach(input => {
+                input.checked = false; 
+            });
+        }
+    });
+
+    inputId.forEach(input => {
+        input.addEventListener("click", () => {
+            //Lấy ra các ô input có name là id và đã được checked là: input[name='id']:checked
+            const countChecked = checkboxMulti.querySelectorAll("input[name='id']:checked").length;
+
+            if(countChecked == inputId.length) {
+                inputCheckAll.checked = true;
+            } else {
+                inputCheckAll.checked = false;
+            }
+        })
+    })
+}
+// End checkbox-multi
+
+// Form-change-multi
+const formChangeMulti = document.querySelector("[form-change-multi]");
+if(formChangeMulti) {
+    formChangeMulti.addEventListener("submit", (event) => {
+        event.preventDefault(); //Ngăn chặn hành vi mặc định load lại trang
+
+        const inputsChecked = document.querySelectorAll("input[name='id']:checked");
+        if(inputsChecked.length > 0) {
+            const ids = [];
+            const inputIds = formChangeMulti.querySelector("input[name='ids']");
+            inputsChecked.forEach(input => {
+                const id = input.value;
+                ids.push(id);
+            });
+            
+            inputIds.value = ids.join(", "); //Nối các phần tử trong mảng thành 1 chuỗi cách nhau bởi theo người dùng quy định
+
+            formChangeMulti.submit();
+        } else {
+            alert("Vui lòng chọn ít nhất một bảng ghi");
+        }
+    });
+}
+// End form-change-multi
