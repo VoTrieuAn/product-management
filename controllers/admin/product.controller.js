@@ -79,8 +79,41 @@ module.exports.changeMulti = async (request, response) => {
                 status: type
             });
             break;
+        case "delete-all":
+            await Product.updateMany({
+                _id: {$in: ids}
+            }, {
+                deleted: true,
+                deletedAt: new Date()
+            });
+            break;
         default:
             break;
     }
     response.redirect("back");
+}
+
+// [DELERE] /admin/products/delete/:id 
+ 
+module.exports.deleteItem = async (request, response) => {
+    try {
+        const id = request.params.id;
+        // (hard delete)
+        // await Product.deleteOne({
+        //     _id: id
+        // });
+        // (Soft delete)
+        await Product.updateOne({
+            _id: id
+        }, {
+            deleted: true,
+            deletedAt: new Date() //lấy ra thời gian hiện tại
+        });
+
+    } catch(error) {
+        alert("Can't delete product");
+    } finally {
+        response.redirect("back");
+    }
+
 }

@@ -10,7 +10,8 @@ const productSchema = new mongoose.Schema({
     thumbnail: String,
     status: String,
     position: Number,
-    deleted: Boolean
+    deleted: Boolean,
+    deletedAt: Date
 });
 //Kết thúc định nghĩa kiểu dữ liệu cho các key
 

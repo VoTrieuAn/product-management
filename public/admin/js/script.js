@@ -107,8 +107,8 @@ if(checkboxMulti) {
             } else {
                 inputCheckAll.checked = false;
             }
-        })
-    })
+        });
+    });
 }
 // End checkbox-multi
 
@@ -117,7 +117,14 @@ const formChangeMulti = document.querySelector("[form-change-multi]");
 if(formChangeMulti) {
     formChangeMulti.addEventListener("submit", (event) => {
         event.preventDefault(); //Ngăn chặn hành vi mặc định load lại trang
+        const type = event.target.elements.type.value;
 
+        if(type == "delete-all") {
+            const inComfirm = confirm("Bạn có chắc muốn xóa những bản ghi này?");
+            if(!inComfirm) {
+                return;
+            }
+        }
         const inputsChecked = document.querySelectorAll("input[name='id']:checked");
         if(inputsChecked.length > 0) {
             const ids = [];
@@ -136,3 +143,24 @@ if(formChangeMulti) {
     });
 }
 // End form-change-multi
+
+// Delete item
+const buttonDelete = document.querySelectorAll("[button-delete]");
+if(buttonDelete.length > 0) {
+    const formDeleteItem = document.querySelector("[form-delete-item]");
+    const path = formDeleteItem.getAttribute("data-path");
+    buttonDelete.forEach(button => {
+        button.addEventListener("click", () => {
+            const inConfirm = confirm("Bạn có chắc muốn xóa bản ghi này?");
+            // console.log(inConfirm); //Trả về true false
+            if(inConfirm) {
+                const id = button.getAttribute("data-id");
+                console.log(id);
+                const action = `${path}/${id}?_method=DELETE`;
+                formDeleteItem.action = action;
+                formDeleteItem.submit();
+            }
+        });
+    });
+}
+// End delete item

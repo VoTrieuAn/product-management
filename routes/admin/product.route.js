@@ -14,4 +14,9 @@ router.patch(
     "/change-multi",
     productController.changeMulti
 );
+
+router.delete(
+    "/delete/:id",
+    productController.deleteItem
+);
 module.exports = router; //Tạo một export
