@@ -35,6 +35,9 @@ module.exports.index = async (request, response) => {
         const objectPagination = paginationHelper(4, request.query, countProducts);
         // End pagination
         const products = await Product.find(find)
+            .sort({
+                position: "desc"
+            })
             .limit(objectPagination.limitItems)
             .skip(objectPagination.skip); //limit là giới hạn số sản phẩm, skip là bở qua bao nhiêu sản phẩm có vị trí là index truyền vào
     
@@ -87,6 +90,19 @@ module.exports.changeMulti = async (request, response) => {
                 deletedAt: new Date()
             });
             break;
+        case "change-position":
+            for (const item of ids) {
+                let [id, position] = item.split("-"); //phá vỡ cấu trúc
+                position = parseInt(position);
+                console.log(id, position);
+
+                await Product.updateOne({
+                    _id: id
+                }, {
+                    position: position
+                })
+            }
+            break;
         default:
             break;
     }
@@ -115,5 +131,4 @@ module.exports.deleteItem = async (request, response) => {
     } finally {
         response.redirect("back");
     }
-
 }

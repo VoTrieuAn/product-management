@@ -7,6 +7,8 @@ module.exports.index = async (request, response) => {
     const products = await Product.find({
         status: "active",
         deleted: false
+    }).sort({
+        position: "desc"
     });
     console.log(products);
     

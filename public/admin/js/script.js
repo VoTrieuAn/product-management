@@ -59,7 +59,6 @@ if(buttonPagination.length > 0) {
 const buttonChangeStatus = document.querySelectorAll("[button-change-status]");
 if(buttonChangeStatus.length > 0) {
     const formChangeStatus = document.querySelector("[form-change-status]");
-    console.log(formChangeStatus);
     const path = formChangeStatus.getAttribute("data-path");
     buttonChangeStatus.forEach(button => {
         button.addEventListener("click", () => {
@@ -78,12 +77,9 @@ if(buttonChangeStatus.length > 0) {
 
 // Checkbox-multi
 const checkboxMulti = document.querySelector("[checkbox-multi]");
-console.log(checkboxMulti);
 if(checkboxMulti) {
     const inputCheckAll = checkboxMulti.querySelector("input[name='checkall']");
     const inputId = checkboxMulti.querySelectorAll("input[name='id']");
-    console.log(inputCheckAll);
-    console.log(inputId);
 
     inputCheckAll.addEventListener("click", () => {
         if(inputCheckAll.checked) { //Trả ra true nếu đã kích vào ngược lại là false
@@ -131,10 +127,17 @@ if(formChangeMulti) {
             const inputIds = formChangeMulti.querySelector("input[name='ids']");
             inputsChecked.forEach(input => {
                 const id = input.value;
-                ids.push(id);
+                if(type == "change-position") {
+                    const position = input
+                        .closest("tr")
+                        .querySelector("input[name='position']").value;
+                    ids.push(`${id}-${position}`);
+                } else {
+                    ids.push(id);
+                }
             });
-            
             inputIds.value = ids.join(", "); //Nối các phần tử trong mảng thành 1 chuỗi cách nhau bởi theo người dùng quy định
+            
 
             formChangeMulti.submit();
         } else {
@@ -155,7 +158,6 @@ if(buttonDelete.length > 0) {
             // console.log(inConfirm); //Trả về true false
             if(inConfirm) {
                 const id = button.getAttribute("data-id");
-                console.log(id);
                 const action = `${path}/${id}?_method=DELETE`;
                 formDeleteItem.action = action;
                 formDeleteItem.submit();
