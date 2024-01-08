@@ -1,0 +1,8 @@
+mixin alert-success(time)
+    //- Do messages là một biến toàn cục nên không cần include vào
+    - if (messages.success)
+        div(
+            class="alert alert-success"
+            show-alert
+            data-time=time
+        ) #{messages.success} <span close-alert>x</span>

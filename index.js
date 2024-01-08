@@ -5,6 +5,9 @@ const dotenv = require("dotenv");
 const methodOverride = require("method-override");
 const systemConfig = require("./config/system.js");
 const bodyParser = require('body-parser');
+const flash = require('express-flash');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
 //Khởi tạo dotenv
 dotenv.config();
 //Kết thúc khởi tạo
@@ -29,8 +32,13 @@ app.set("view engine", "pug");
 //nhúng file tĩnh public
 app.use(express.static("public"));
 //App local variable
-
+// Flash
+app.use(cookieParser('JKAKKLASDFLKL'));
+app.use(session({ cookie: { maxAge: 60000 }}));
+app.use(flash());
+// End flash
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
+
 
 
 //Nhúng vòa đây routesClient vòa

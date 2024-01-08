@@ -66,7 +66,9 @@ module.exports.changeStatus = async (request, response) => {
     }, {
         status: status
     });
-    response.redirect(`/${systemConfig.prefixAdmin}/products`); //Back về lại trang trước hoặc trang mình quy định
+    
+    request.flash('success', 'Cập nhật trạng thái thành công');
+        response.redirect(`/${systemConfig.prefixAdmin}/products`); //Back về lại trang trước hoặc trang mình quy định
 }
 
 // [PATCH] /admin/products/change-multi
@@ -81,6 +83,7 @@ module.exports.changeMulti = async (request, response) => {
             }, {
                 status: type
             });
+            request.flash('success', 'Cập nhật trạng thái thành công');
             break;
         case "delete-all":
             await Product.updateMany({
