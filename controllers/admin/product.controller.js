@@ -67,7 +67,8 @@ module.exports.changeStatus = async (request, response) => {
         status: status
     });
     
-    request.flash('success', 'Cập nhật trạng thái thành công');
+    let trans = status == "active" ? "hoạt động" : "dừng hoạt động";
+    request.flash('success', `Đã cập nhật thành trạng thái ${trans}`);
         response.redirect(`/${systemConfig.prefixAdmin}/products`); //Back về lại trang trước hoặc trang mình quy định
 }
 
@@ -83,7 +84,8 @@ module.exports.changeMulti = async (request, response) => {
             }, {
                 status: type
             });
-            request.flash('success', 'Cập nhật trạng thái thành công');
+            let trans = type == "active" ? "hoạt động" : "dừng hoạt động";
+            request.flash('success', `Đã cập nhật thành trạng thái ${trans}`);
             break;
         case "delete-all":
             await Product.updateMany({
@@ -92,6 +94,7 @@ module.exports.changeMulti = async (request, response) => {
                 deleted: true,
                 deletedAt: new Date()
             });
+            request.flash('success', `Xóa sản phẩm thành công`);
             break;
         case "change-position":
             for (const item of ids) {
@@ -105,6 +108,7 @@ module.exports.changeMulti = async (request, response) => {
                     position: position
                 })
             }
+            request.flash('success', `Thay đổi vị trí thành công`);
             break;
         default:
             break;
@@ -128,7 +132,7 @@ module.exports.deleteItem = async (request, response) => {
             deleted: true,
             deletedAt: new Date() //lấy ra thời gian hiện tại
         });
-
+        request.flash('success', `Xóa sản phẩm thành công`);
     } catch(error) {
         alert("Can't delete product");
     } finally {
