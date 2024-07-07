@@ -1,20 +1,14 @@
+//Nhiệm vụ chứa các routes của product
 const express = require('express');
 const router = express.Router();
+const productControllers = require('../../controllers/client/product.controller');
 
-router.get('/', (req, res) => {
-    res.render('./client/pages/products/index.pug', {
-        title: 'Hey',
-        message: 'Trang chi tiết sản phẩm'
-    });
-});
-router.get('/detail', (req, res) => {
+router.get('/', productControllers.index);
 
-});
-router.get('/edit', (req, res) => {
+// router.get('/detail', productControllers.detail);
 
-});
-router.get('/create', (req, res) => {
+// router.get('/edit', productControllers.edit);
 
-});
+// router.get('/create', productControllers.create);
 
 module.exports = router;

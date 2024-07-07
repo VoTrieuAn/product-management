@@ -1,11 +1,7 @@
+//Nhiệm vụ chưa các route của trong home
 const express = require('express');
 const router = express.Router();
-
-router.get('/', (req, res) => {
-    res.render('./client/pages/home/index.pug', {
-        title: 'Hey',
-        message: 'Trang chủ'
-    });
-});
+const homeController = require('../../controllers/client/home.controller');
+router.get('/', homeController.index);
 
 module.exports = router;

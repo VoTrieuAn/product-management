@@ -1,3 +1,5 @@
+//Nhiệm vụ là chứa các route tổng
+
 const productRoutes = require('./product.route');
 const homeRoute = require('./home.route');
 module.exports = (app) => { //Cách export trong node js
