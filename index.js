@@ -1,7 +1,8 @@
 const express = require('express');
-const routesClient = require('./routes/client/index.route.js');
 const dotenv = require('dotenv');
 const database = require('./config/database.js');
+const routesClient = require('./routes/client/index.route.js');
+const routesAdmin = require('./routes/admin/index.route.js');
 
 //Load environment variable
 dotenv.config(); //Có cái này mới chạy được env
@@ -38,7 +39,9 @@ app.use(express.static('public'));
 
 //Dip routes
 routesClient(app);
+routesAdmin(app);
 
+//End dip routes
 app.listen(port, () => {
     console.log(`Application listens on port ${port}`);
 });
