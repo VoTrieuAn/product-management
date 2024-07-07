@@ -2,8 +2,7 @@
 //[GET]: /products/
 module.exports.index = (req, res) => { //Thường trang danh sách sản phẩm đặt tên là index
     res.render('./client/pages/products/index.pug', {
-        title: 'Hey',
-        message: 'Trang chi tiết sản phẩm'
+        pageTitle: 'Danh sách sản phẩm'
     });
 }
 
