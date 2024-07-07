@@ -3,7 +3,7 @@ const dotenv = require('dotenv');
 const database = require('./config/database.js');
 const routesClient = require('./routes/client/index.route.js');
 const routesAdmin = require('./routes/admin/index.route.js');
-
+const systemConfig = require('./config/system.js')
 //Load environment variable
 dotenv.config(); //Có cái này mới chạy được env
 //End enviroment variable
@@ -40,6 +40,9 @@ app.use(express.static('public'));
 //Dip routes
 routesClient(app);
 routesAdmin(app);
+
+//App local variables
+app.locals.prefixAdmin = systemConfig.prefixAdmin //Tạo ra một biến local dùng ở bất cứ đâu kể cả file pug
 
 //End dip routes
 app.listen(port, () => {
