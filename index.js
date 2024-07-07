@@ -1,12 +1,17 @@
 const express = require('express');
 const routesClient = require('./routes/client/index.route.js');
 const dotenv = require('dotenv');
+const database = require('./config/database.js');
 
 //Load environment variable
-dotenv.config();
+dotenv.config(); //Có cái này mới chạy được env
 //End enviroment variable
 
 const app = express();
+
+//Connect database
+database.connectDatabase();
+//End connect database
 
 // Access enviroment variable in env
 const port = process.env.PORT;
@@ -35,5 +40,5 @@ app.use(express.static('public'));
 routesClient(app);
 
 app.listen(port, () => {
-    console.log('Chạy thành công trên cổng: ' + port);
+    console.log(`Application listens on port ${port}`);
 });
