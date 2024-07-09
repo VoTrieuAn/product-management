@@ -48,6 +48,35 @@ if(buttonsPagination.length > 0) {
       url.searchParams.set('page', page);
       location.href = url.href;
     });
-  })
+  });
 }
 //Pagination
+
+// Button change status
+/**
+ * Logic của bài toán
+ * - Mục tiêu là submit một form với phương thức PATCH có đường dẫn hoàn chỉnh có giá trị status và id tương ứng của sản phẩm
+ */
+const buttonsChangeStatus = document.querySelectorAll('[button-change-status]');
+if(buttonsChangeStatus.length > 0) {
+  // Lấy ra form
+  const formChangeStatus = document.querySelector('[form-change-status]');
+  // Lấy ra path định nghĩa trong form
+  const path = formChangeStatus.getAttribute('data-path');
+  buttonsChangeStatus.forEach((button) => {
+    button.addEventListener('click', () => {
+      const statusCurrent = button.getAttribute('data-status');
+      const id = button.getAttribute('data-id');
+      
+      const statusChange = statusCurrent == 'active' ? 'inactive' : 'active';
+      //Tạo mộ url hoàn chỉnh cho action
+        // ?_method=DELETE => Nhúng thêm cụm này vào để override method (chú ý: form phải là phương thức GET)
+      const action = `${path}/${statusChange}/${id}?_method=PATCH`;
+      
+      formChangeStatus.action = action; //Set giá trị cho thuộc tính action của form
+
+      formChangeStatus.submit(); // Gọi hàm submit của form
+    });
+  });
+}
+//End button change status

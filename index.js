@@ -1,6 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const database = require('./config/database.js');
+const methodOverride = require('method-override');
 const routesClient = require('./routes/client/index.route.js');
 const routesAdmin = require('./routes/admin/index.route.js');
 const systemConfig = require('./config/system.js')
@@ -36,12 +37,15 @@ app.set('view engine', 'pug');
  */
 app.use(express.static('public'));
 //End create static file
-
+// Method override
+app.use(methodOverride('_method')) // giá trị truyền và là _method thì lát dùng với nó
+// End method override
 //Dip routes
 routesClient(app);
 routesAdmin(app);
 
 //App local variables
+    // app.locals.<name> = <value>
 app.locals.prefixAdmin = systemConfig.prefixAdmin //Tạo ra một biến local dùng ở bất cứ đâu kể cả file pug
 
 //End dip routes

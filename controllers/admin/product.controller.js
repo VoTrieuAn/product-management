@@ -3,6 +3,7 @@ const Product = require("../../models/product.model");
 const systemConfig = require('../../config/system');
 const filterStateHelper = require('../../helpers/filter-state.helper');
 const paginationHelper = require('../../helpers/pagination.helper');
+// [GET] /admin/products
 module.exports.index = async (req, res) => {
   try {
     /**
@@ -49,4 +50,23 @@ module.exports.index = async (req, res) => {
     //redirect(url): chuyển hướng sang trang khác
     res.redirect(`/${systemConfig.prefixAdmin}/products`);
   }
+}
+
+//[PATH] /admin/products/change-status/:status/:_id
+module.exports.changeState = async (req, res) => {
+  const status = req.params.status;
+  const id = req.params._id;
+
+  await Product.updateOne({
+    _id: id //Điều kiện tìm kiếm
+  }, {
+    status: status // Key thay đổi với giá trị mới của key
+  });
+
+  // Back về trang products
+  /**
+   * back: trả về trang trước đó
+   * or url: url tự định nghĩa
+   */
+  res.redirect('back');
 }

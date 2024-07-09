@@ -45,14 +45,21 @@ block main
                 td 
                   if(item.status == 'active')
                     //- javascript:; => Trình duyệt sẽ hiểu ta muốn link sử dụng javascript để viết code, là một URL đặc biệt, về cơ bản là một liên kết không làm gì cả. Nó chạy một đoạn mã JavaScript trống khi được nhấp vào, giúp ngăn việc điều hướng đến trang khác.
+                    //- Khi gửi vào đường link cho thẻ <a> mặc định là phương thức GET 
                     a(
-                      href="#" 
+                      href="javascript:;" 
                       class="badge badge-success"
+                      data-id=item.id
+                      data-status=item.status
+                      button-change-status
                     ) Hoạt động 
                   else
                     a(
-                      href="#" 
+                      href="javascript:;" 
                       class="badge badge-danger"
+                      data-id=item.id
+                      data-status=item.status
+                      button-change-status
                     ) Dừng hoạt động
                 td 
                   button(class="btn btn-warning btn-sm") Sửa
@@ -60,3 +67,14 @@ block main
     //- Pagination
     +pagination(pagination)
     //- End pagination
+    //- Form change-status
+      //- Tác dụng khi submit form này thì ngay phần action sẽ truyền đường dẫn ở data-path lên thanh url
+      //- Lý do dùng thẻ form vì nó có thể sử dụng nhiều phương thức khác ngoài GET như thẻ <a>
+      //- Form của html chỉ có 2 phương thức GET và POST
+    form(
+      form-change-status
+      action=""
+      method="POST"
+      data-path=`/${prefixAdmin}/products/change-status`
+    ) 
+    //- End form change-status
