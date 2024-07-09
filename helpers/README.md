@@ -1,0 +1,1 @@
+Đây là folder đứa chứa những hàm trợ giúp

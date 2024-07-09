@@ -18,7 +18,7 @@ if(buttons.length > 0) {
 }
 //End button status
 
-//Fix submit multiple conditions
+//Submit multiple conditions
 const formSearch = document.querySelector('#form-search');
 console.log(formSearch);
 if(formSearch) {
@@ -37,4 +37,5 @@ if(formSearch) {
     location.href = url.href; //Set lại url cho trang web
   });
 }
-//End fix submit multiple conditions
+//Submit multiple conditions
+

@@ -1,4 +1,5 @@
 extends ../../layouts/default.pug
+include ../../mixins/filter-state.pug
 
 block main 
   h1(class="mb-4") #{pageTitle}
@@ -7,11 +8,7 @@ block main
     .card-body 
       .row 
         .col-6
-          each item in filterState
-            button(
-              class=`btn btn-sm ml-1 btn-outline-success ${item.class}`
-              button-status=item.status
-            ) #{item.name}
+          +filter-state(filterState)
         .col-6 
           //- Form mặc định method="GET"
           form(id="form-search") 
@@ -55,9 +52,16 @@ block main
                 td #{item.price}$
                 td 
                   if(item.status == 'active')
-                    a(href="#" class="badge badge-success") Hoạt động 
+                    //- javascript:; => Trình duyệt sẽ hiểu ta muốn link sử dụng javascript để viết code, là một URL đặc biệt, về cơ bản là một liên kết không làm gì cả. Nó chạy một đoạn mã JavaScript trống khi được nhấp vào, giúp ngăn việc điều hướng đến trang khác.
+                    a(
+                      href="#" 
+                      class="badge badge-success"
+                    ) Hoạt động 
                   else
-                    a(href="#" class="badge badge-danger") Dừng hoạt động
+                    a(
+                      href="#" 
+                      class="badge badge-danger"
+                    ) Dừng hoạt động
                 td 
                   button(class="btn btn-warning btn-sm") Sửa
                   button(class="btn btn-danger btn-sm ml-1") Xóa
