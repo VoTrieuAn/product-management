@@ -18,9 +18,8 @@ if(buttons.length > 0) {
 }
 //End button status
 
-//Submit multiple conditions
+//Form search
 const formSearch = document.querySelector('#form-search');
-console.log(formSearch);
 if(formSearch) {
   //Mặc định của form là load lại trang
   formSearch.addEventListener('submit', (event) => {
@@ -37,5 +36,18 @@ if(formSearch) {
     location.href = url.href; //Set lại url cho trang web
   });
 }
-//Submit multiple conditions
+//Form search
 
+//Pagination
+const buttonsPagination = document.querySelectorAll('[button-pagination]');
+if(buttonsPagination.length > 0) {
+  let url = new URL(location.href);
+  buttonsPagination.forEach((button) => {
+    button.addEventListener('click', () => {
+      const page = button.getAttribute('button-pagination');
+      url.searchParams.set('page', page);
+      location.href = url.href;
+    });
+  })
+}
+//Pagination
