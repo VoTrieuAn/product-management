@@ -1,0 +1,29 @@
+mixin pagination(pagination)
+  nav 
+      ul(class="pagination")
+        button(
+          class="page-link"
+          button-pagination=1
+        ) Đầu
+        if(pagination.currentPage > 1)
+          li(class="page-item")
+            button(
+              class="page-link"
+              button-pagination=pagination.currentPage - 1
+            ) <--
+        - for(let index = 1; index <= pagination.totalPage; index++)
+          li(class=`page-item ${pagination.currentPage == index ? 'active' : ''}`)
+            button(
+              class="page-link" 
+              button-pagination=index
+            ) #{index}
+        if(pagination.currentPage < pagination.totalPage)
+          li(class="page-item")
+            button(
+              class="page-link"
+              button-pagination=pagination.currentPage + 1
+            ) -->
+        button(
+          class="page-link"
+          button-pagination=pagination.totalPage
+        ) Cuối

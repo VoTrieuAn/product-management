@@ -1,7 +1,8 @@
 //[GET] /admin/products/
 const Product = require("../../models/product.model");
-const filterStateHelper = require('../../helpers/filter-state.helper');
 const systemConfig = require('../../config/system');
+const filterStateHelper = require('../../helpers/filter-state.helper');
+const paginationHelper = require('../../helpers/pagination.helper');
 module.exports.index = async (req, res) => {
   try {
     /**
@@ -28,24 +29,9 @@ module.exports.index = async (req, res) => {
     //End search
   
     //Pagination (Phân trang)
-    const objectPagination = {
-      currentPage: 1,
-      limitItems: 4,
-    }
-  
-    if(req.query.page) {
-      objectPagination.currentPage = parseInt(req.query.page);
-    }
-  
-    objectPagination.skip = (objectPagination.currentPage - 1) * objectPagination.limitItems;
-    
       //Lấy ra số lượng bản ghi
     const countProducts = await Product.countDocuments(find); 
-  
-      //Math.ceil: làm tròn lên
-    const totalPage = Math.ceil(countProducts / objectPagination.limitItems); 
-    
-    objectPagination.totalPage = totalPage;
+    const objectPagination = paginationHelper(countProducts, 5, req.query);
     //End pagination
   
     const products = await Product.find(find)

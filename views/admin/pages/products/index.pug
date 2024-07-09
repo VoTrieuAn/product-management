@@ -1,6 +1,7 @@
 extends ../../layouts/default.pug
 include ../../mixins/filter-state.pug
 include ../../mixins/search.pug
+include ../../mixins/pagination.pug
 
 block main 
   h1(class="mb-4") #{pageTitle}
@@ -9,9 +10,13 @@ block main
     .card-body 
       .row 
         .col-6
+          //- Filter state
           +filter-state(filterState)
+          //- End filter state
         .col-6 
+          //- Search
           +search(keyword)
+          //- End search
     .card.mb-3 
       .card-header Danh sách  
       .card-body
@@ -52,31 +57,6 @@ block main
                 td 
                   button(class="btn btn-warning btn-sm") Sửa
                   button(class="btn btn-danger btn-sm ml-1") Xóa
-    nav 
-      ul(class="pagination")
-        button(
-          class="page-link"
-          button-pagination=1
-        ) Đầu
-        if(pagination.currentPage > 1)
-          li(class="page-item")
-            button(
-              class="page-link"
-              button-pagination=pagination.currentPage - 1
-            ) <--
-        - for(let index = 1; index <= pagination.totalPage; index++)
-          li(class=`page-item ${pagination.currentPage == index ? 'active' : ''}`)
-            button(
-              class="page-link" 
-              button-pagination=index
-            ) #{index}
-        if(pagination.currentPage < pagination.totalPage)
-          li(class="page-item")
-            button(
-              class="page-link"
-              button-pagination=pagination.currentPage + 1
-            ) -->
-        button(
-          class="page-link"
-          button-pagination=pagination.totalPage
-        ) Cuối
+    //- Pagination
+    +pagination(pagination)
+    //- End pagination
