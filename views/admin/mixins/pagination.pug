@@ -10,8 +10,8 @@ mixin pagination(pagination)
             button(
               class="page-link"
               button-pagination=pagination.currentPage - 1
-            ) <--
-        - for(let index = 1; index <= pagination.totalPage; index++)
+            ) &laquo;
+        - for(let index = pagination.numberDisplay.startPage; index <= pagination.numberDisplay.endPage; index++)
           li(class=`page-item ${pagination.currentPage == index ? 'active' : ''}`)
             button(
               class="page-link" 
@@ -22,7 +22,7 @@ mixin pagination(pagination)
             button(
               class="page-link"
               button-pagination=pagination.currentPage + 1
-            ) -->
+            ) &raquo;
         button(
           class="page-link"
           button-pagination=pagination.totalPage

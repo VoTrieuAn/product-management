@@ -6,10 +6,11 @@ if(buttons.length > 0) {
     button.addEventListener('click', () => {
       const status = button.getAttribute('button-status');
       if(status) {
-        //Dùng để update lại đường link tham số (key, value) thêm ?key=value
-        url.searchParams.set("status", status); 
+        // Dùng để update lại đường link tham số (key, value) thêm ?key=value
+        url.searchParams.set("status", status);
+        url.searchParams.delete('page'); // Xóa đi param page trang hiện tại đang ở tại các status khác
       } else {
-        url.searchParams.delete("status"); //Dùng để xóa đi key trên url sau dấu ?
+        url.searchParams.delete("status"); // Dùng để xóa đi key trên url sau dấu ?
       }
 
       location.href = url.href; //Set lại url cho trang web
@@ -28,7 +29,8 @@ if(formSearch) {
     const keyword = event.target.keyword.value
     if(keyword) {
       //Dùng để update lại đường link tham số (key, value) thêm ?key=value
-      url.searchParams.set("keyword", keyword); 
+      url.searchParams.set("keyword", keyword);
+      url.searchParams.delete('page'); // Xóa đi param page trang hiện tại đang ở tại để tìm kiếm không nằm trong 1 trang
     } else {
       url.searchParams.delete("keyword"); //Dùng để xóa đi key trên url sau dấu ?
     }

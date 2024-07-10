@@ -32,7 +32,7 @@ module.exports.index = async (req, res) => {
     //Pagination (Phân trang)
       //Lấy ra số lượng bản ghi
     const countProducts = await Product.countDocuments(find); 
-    const objectPagination = paginationHelper(countProducts, 5, req.query);
+    const objectPagination = paginationHelper(countProducts, 5, req.query, 1);
     //End pagination
   
     const products = await Product.find(find)
