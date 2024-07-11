@@ -8,4 +8,7 @@ router.get('/', controllerProduct.index);
 //[PATCH] /admin/products/change-status/:status/:_id
 router.patch('/change-status/:status/:_id', controllerProduct.changeState);
 
+//[PATCH] /admin/products/change-multi
+router.patch('/change-multi', controllerProduct.changeMulti);
+
 module.exports = router;

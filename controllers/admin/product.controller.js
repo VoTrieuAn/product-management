@@ -70,3 +70,26 @@ module.exports.changeState = async (req, res) => {
    */
   res.redirect('back');
 }
+
+//[PATCH] /admin/products/change-multi
+module.exports.changeMulti = async (req, res) => {
+  /**
+   * Tất cả data nằm trong form khi gửi lên cho backend được lấy thông qua body
+   * body này trể về undifind nên phải tải thêm thư viện về
+   */
+  const type = req.body.type;
+  const ids = req.body.ids.split(', ');
+  switch (type) {
+    case 'active':
+    case 'inactive':
+      await Product.updateMany({
+        _id: {$in: ids}
+      },{
+        status: type
+      });
+      break;
+    default:
+      break;
+  }
+  res.redirect('back');
+}

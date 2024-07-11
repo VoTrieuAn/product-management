@@ -1,6 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const database = require('./config/database.js');
+const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const routesClient = require('./routes/client/index.route.js');
 const routesAdmin = require('./routes/admin/index.route.js');
@@ -40,6 +41,12 @@ app.use(express.static('public'));
 // Method override
 app.use(methodOverride('_method')) // giá trị truyền và là _method thì lát dùng với nó
 // End method override
+
+//Body parser
+    // parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+//End body parser
+
 //Dip routes
 routesClient(app);
 routesAdmin(app);

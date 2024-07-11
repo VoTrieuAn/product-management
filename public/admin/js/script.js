@@ -82,3 +82,49 @@ if(buttonsChangeStatus.length > 0) {
   });
 }
 //End button change status
+
+// Checkbox multi
+const checkboxMulti = document.querySelector('[checkbox-multi]');
+if(checkboxMulti) {
+  const inputCheckAll = checkboxMulti.querySelector("input[name='check-all']");
+  const inputIds = checkboxMulti.querySelectorAll("input[name='_id']");
+  // Check all
+  inputCheckAll.addEventListener('click', () => {
+    inputIds.forEach((input) => {
+      input.checked = inputCheckAll.checked ? true : false;
+    });
+  });
+  // End check all
+  //Check xem tất cả được check thì bật check all ngược lại là tắt
+  inputIds.forEach((input) => {
+    input.addEventListener('click', () => {
+      const countChecked = checkboxMulti.querySelectorAll("input[name='_id']:checked").length;
+      inputCheckAll.checked = countChecked == inputIds.length ? true : false;
+    });
+  });
+  //End check xem tất cả được check thì bật check all ngược lại là tắt
+}
+//End checkbox multi
+
+// Form change multi
+const formChangeMulti = document.querySelector('[form-change-multi]');
+console.log(formChangeMulti);
+if(formChangeMulti) {
+  formChangeMulti.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const inputChecked = document.querySelectorAll("input[name='_id']:checked");
+    const ids = [];
+    if(inputChecked.length) {
+      inputChecked.forEach((input) => {
+        ids.push(input.value);
+      });
+      const inputText = formChangeMulti.querySelector("input[name='ids']");
+      const newValue = ids.join(", ");
+      inputText.value = newValue;
+      formChangeMulti.submit();
+    } else {
+      alert('Vui lòng chọn ít nhất một bảng ghi');
+    }
+  });
+}
+// End form change multi
