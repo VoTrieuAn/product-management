@@ -25,9 +25,18 @@ block main
     .card.mb-3 
       .card-header Danh sách  
       .card-body
-        //- Change multi products
-        +form-change-multi(`/${prefixAdmin}/products/change-multi?_method=PATCH`)
-        //- End change multi products
+        .row 
+          .col-8 
+            //- Change multi products
+            +form-change-multi(`/${prefixAdmin}/products/change-multi?_method=PATCH`)
+            //- End change multi products
+          .col-4.text-right
+            //- Add item
+            a(
+              href=`/${prefixAdmin}/products/create`
+              class="btn btn-outline-success"
+            ) + Thêm mới
+            //- End add item
         table.table.table-hover.table-sm(checkbox-multi)
           thead
             tr

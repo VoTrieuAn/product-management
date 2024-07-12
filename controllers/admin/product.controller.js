@@ -40,7 +40,7 @@ module.exports.index = async (req, res) => {
       .limit(objectPagination.limitItems)
       .skip(objectPagination.skip);
   
-    res.render('./admin/pages/products/index.pug', {
+    res.render('admin/pages/products/index.pug', {
         pageTitle: 'Danh sách sản phẩm',
         products: products,
         filterState: filterState,
@@ -132,4 +132,11 @@ module.exports.deleteItem = async (req, res) => {
   }
   req.flash('success', 'Xóa sản phẩm thành công!');
   res.redirect('back');
+}
+
+//[GET] /admin/products/create
+module.exports.create = async (req, res) => {
+  res.render('admin/pages/products/create.pug', {
+    pageTitle: 'Thêm mới sản phẩm'
+  });
 }
