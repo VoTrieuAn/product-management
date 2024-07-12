@@ -11,4 +11,7 @@ router.patch('/change-status/:status/:_id', controllerProduct.changeState);
 //[PATCH] /admin/products/change-multi
 router.patch('/change-multi', controllerProduct.changeMulti);
 
+//[DELETE] /admin/products/delete/:_id
+router.delete('/delete/:_id', controllerProduct.deleteItem);
+
 module.exports = router;

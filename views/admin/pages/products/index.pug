@@ -77,7 +77,11 @@ block main
                     ) Dừng hoạt động
                 td 
                   button(class="btn btn-warning btn-sm") Sửa
-                  button(class="btn btn-danger btn-sm ml-1") Xóa
+                  button(
+                    class="btn btn-danger btn-sm ml-1"
+                    data-id=item.id
+                    button-delete
+                  ) Xóa
     //- Pagination
     +pagination(pagination)
     //- End pagination
@@ -92,3 +96,11 @@ block main
       data-path=`/${prefixAdmin}/products/change-status`
     ) 
     //- End form change-status
+    //- Form delete item
+    form(
+      form-delete-item
+      action=""
+      method="POST"
+      data-path=`/${prefixAdmin}/products/delete`
+    )
+    //- End form delete item
