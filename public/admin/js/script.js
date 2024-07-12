@@ -111,6 +111,15 @@ const formChangeMulti = document.querySelector('[form-change-multi]');
 if(formChangeMulti) {
   formChangeMulti.addEventListener('submit', (event) => {
     event.preventDefault();
+    //target.elemnts truy cập vào các phần tử trong form
+    const type = event.target.elements.type.value;
+    console.log(event.target);
+    if(type == 'delete-all') {
+      const isConfirm = confirm('Bạn có chắc muốn xóa không');
+      if(!isConfirm) {
+        return;
+      }
+    }
     const inputChecked = document.querySelectorAll("input[name='_id']:checked");
     const ids = [];
     if(inputChecked.length) {

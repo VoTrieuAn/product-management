@@ -70,7 +70,6 @@ module.exports.changeState = async (req, res) => {
    */
   res.redirect('back');
 }
-
 //[PATCH] /admin/products/change-multi
 module.exports.changeMulti = async (req, res) => {
   /**
@@ -86,6 +85,14 @@ module.exports.changeMulti = async (req, res) => {
         _id: {$in: ids}
       },{
         status: type
+      });
+    case 'delete-all':
+      console.log(ids);
+      await Product.updateMany({
+        _id: {$in: ids}
+      }, {
+        deleted: true,
+        deletedAt: new Date()
       });
       break;
     default:
