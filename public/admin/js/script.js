@@ -104,7 +104,7 @@ if(checkboxMulti) {
   });
   //End check xem tất cả được check thì bật check all ngược lại là tắt
 }
-//End checkbox multi
+// End checkbox multi
 
 // Form change multi
 const formChangeMulti = document.querySelector('[form-change-multi]');
@@ -145,6 +145,7 @@ if(formChangeMulti) {
   });
 }
 // End form change multi
+
 // Button delete one item
 const buttonsDelete = document.querySelectorAll('[button-delete]');
 if(buttonsDelete.length > 0) {
@@ -163,3 +164,18 @@ if(buttonsDelete.length > 0) {
   });
 }
 //End button delete one item
+
+// Show alert
+const showAlert = document.querySelector('[show-alert]');
+if(showAlert) {
+  const dataTime = parseInt(showAlert.getAttribute('data-time'));
+  setTimeout(() => {
+    showAlert.classList.add('alert-hidden');
+  }, dataTime);
+
+  const closeAlert = showAlert.querySelector('[close-alert]');
+  closeAlert.addEventListener('click', () => {
+    showAlert.classList.add('alert-hidden');
+  });
+}
+// End show alert

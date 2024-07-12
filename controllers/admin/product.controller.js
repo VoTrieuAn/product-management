@@ -69,6 +69,7 @@ module.exports.changeState = async (req, res) => {
    * back: trả về trang trước đó
    * or url: url tự định nghĩa
    */
+  req.flash('success', 'Cập nhật trạng thái thành công!');
   res.redirect('back');
 }
 //[PATCH] /admin/products/change-multi
@@ -87,6 +88,7 @@ module.exports.changeMulti = async (req, res) => {
       },{
         status: type
       });
+      req.flash('success', 'Cập nhật trạng thái thành công!');
     case 'delete-all':
       await Product.updateMany({
         _id: {$in: ids}

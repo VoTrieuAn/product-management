@@ -5,7 +5,10 @@ const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const routesClient = require('./routes/client/index.route.js');
 const routesAdmin = require('./routes/admin/index.route.js');
-const systemConfig = require('./config/system.js')
+const systemConfig = require('./config/system.js');
+const flash = require('express-flash');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
 //Load environment variable
 dotenv.config(); //Có cái này mới chạy được env
 //End enviroment variable
@@ -47,9 +50,18 @@ app.use(methodOverride('_method')) // giá trị truyền và là _method thì l
 app.use(bodyParser.urlencoded({ extended: false }))
 //End body parser
 
+// Flash message
+    //Nhúng vào sẽ bị lỗi cookieParser vì express không hỗ trợ
+    //Nhúng vào sẽ bị lỗi session vì express không hỗ trợ
+    app.use(cookieParser('KJJSLKASASASA')); //Key bất kỳ
+    app.use(session({ cookie: { maxAge: 60000 }}));
+    app.use(flash());
+// End flash message
+
 //Dip routes
 routesClient(app);
 routesAdmin(app);
+//End dip routes
 
 //App local variables
     // app.locals.<name> = <value>
