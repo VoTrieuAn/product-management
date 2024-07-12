@@ -35,6 +35,7 @@ block main
               th Hình ảnh 
               th Tiêu đề
               th Giá
+              th Vị trí
               th Trạng thái
               th Hành động
           tbody 
@@ -56,6 +57,14 @@ block main
                     )
                 td #{item.title}
                 td #{item.price}$
+                td
+                  input(
+                    type="number" 
+                    name="position" 
+                    value=item.position
+                    style="width: 60px"
+                    min="1"
+                  )
                 td 
                   if(item.status == 'active')
                     //- javascript:; => Trình duyệt sẽ hiểu ta muốn link sử dụng javascript để viết code, là một URL đặc biệt, về cơ bản là một liên kết không làm gì cả. Nó chạy một đoạn mã JavaScript trống khi được nhấp vào, giúp ngăn việc điều hướng đến trang khác.
