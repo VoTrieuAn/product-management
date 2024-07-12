@@ -17,4 +17,7 @@ router.delete('/delete/:_id', controllerProduct.deleteItem);
 //[GET] /admin/products/create
 router.get('/create', controllerProduct.create);
 
+//[POST] /admin/products/create
+router.post('/create', controllerProduct.createPost);
+
 module.exports = router;

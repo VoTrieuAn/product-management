@@ -140,3 +140,28 @@ module.exports.create = async (req, res) => {
     pageTitle: 'Thêm mới sản phẩm'
   });
 }
+
+//[POST] /admin/products/create
+module.exports.createPost = async (req, res) => {
+  req.body.price = parseInt(req.body.price);
+  req.body.discountPercentage = parseInt(req.body.discountPercentage);
+  req.body.stock = parseInt(req.body.stock);
+  const position = req.body.position
+  
+  if(position == '') {
+    const countProduct = await Product.countDocuments();
+    req.body.position = countProduct + 1
+  } else {
+    req.body.position = parseInt(position);
+  }
+  
+  //Tạo mới một sản phẩm từ model
+  const product = new Product(req.body);
+
+  //Lưu sản phẩm vừa tạo
+  await product.save();
+
+  req.flash('success', 'Thêm mới sản phẩm thành công!');
+
+  res.redirect(`/${systemConfig.prefixAdmin}/products`);
+}
