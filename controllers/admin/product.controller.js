@@ -154,6 +154,14 @@ module.exports.createPost = async (req, res) => {
   } else {
     req.body.position = parseInt(position);
   }
+
+  // req.file is the `thumbnail` file
+  // req.body will hold the text fields, if there were any
+
+  console.log(req.file);
+  if(req.file && req.file.filename) {
+    req.body.thumbnail = `/uploads/${req.file.filename}`;
+  }
   
   //Tạo mới một sản phẩm từ model
   const product = new Product(req.body);
