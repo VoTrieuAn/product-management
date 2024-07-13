@@ -179,3 +179,22 @@ if(showAlert) {
   });
 }
 // End show alert
+
+// Preview image
+const uploadImage = document.querySelector('[upload-image]');
+if(uploadImage) {
+  const uploadImageInput = uploadImage.querySelector('[upload-image-input]');
+  const updateImagePreview = uploadImage.querySelector('[upload-image-preview]');
+
+  uploadImageInput.addEventListener('change', (event) => {
+    /**
+     * - input.files
+     * Được sử dụng để truy cập các tệp mà người dùng đã chọn trong một phần tử <input> có thuộc tính type="file". Thuộc tính này trả về một đối tượng FileList, chứa danh sách các tệp được chọn.
+     */
+    const [file] = uploadImageInput.files;
+    if(file) {
+      updateImagePreview.src = URL.createObjectURL(file);
+    }
+  });
+}
+// End preview image
