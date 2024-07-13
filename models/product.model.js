@@ -1,4 +1,7 @@
 const mongoose = require("mongoose");
+const slug = require('mongoose-slug-updater');
+
+mongoose.plugin(slug);
 
 //Create a schema
 /**
@@ -6,6 +9,12 @@ const mongoose = require("mongoose");
  */
 const productSchema = new mongoose.Schema({
   title: String,
+  // Tiêu đề có thể trùng nhau nhưng slug là duy nhất
+  slug: {
+    type: String,
+    slug: "title",
+    unique: true
+  },
   description: String,
   price: Number,
   discountPercentage: Number,
@@ -14,10 +23,12 @@ const productSchema = new mongoose.Schema({
   status: String,
   position: Number,
   deleted: {
-    type: Boolean,
-    default: false
+    type: Boolean, // Kiểu dữ liệu
+    default: false // Giá trị mặc định
   },
   deletedAt: Date
+}, {
+  timestamps: true // key của mongoose
 });
 //End create a schema
 
