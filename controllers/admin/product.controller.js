@@ -219,3 +219,22 @@ module.exports.editPatch = async (req, res) => {
 
   res.redirect('back');
 }
+
+// [GET] /admin/products/detail/:_id
+module.exports.detail = async (req, res) => {
+  try {
+    const id = req.params._id;
+
+    const product = await Product.findOne({
+      _id: id,
+      deleted: false
+    });
+
+    res.render('admin/pages/products/detail.pug', {
+      pageTitle: 'Chi tiết sản phẩm',
+      product: product
+    });
+  } catch (error) {
+    res.redirect(`/${systemConfig.prefixAdmin}/products`);
+  }
+}

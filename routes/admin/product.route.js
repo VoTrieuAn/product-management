@@ -40,4 +40,6 @@ router.patch(
   controllerProduct.editPatch
 )
 
+// [GET] /admin/products/detail/:_id
+router.get('/detail/:_id', controllerProduct.detail)
 module.exports = router;
