@@ -29,4 +29,15 @@ router.post(
   controllerProduct.createPost
 );
 
+// [GET] /admin/proudcts/edit/:_id
+router.get('/edit/:_id', controllerProduct.edit);
+
+// [PATCH] /admin/proudcts/edit/:_id
+router.patch(
+  '/edit/:_id',
+  upload.single('thumbnail'),
+  validate.createPost,
+  controllerProduct.editPatch
+)
+
 module.exports = router;
