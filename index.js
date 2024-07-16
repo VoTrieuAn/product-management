@@ -22,7 +22,7 @@ database.connectDatabase();
 // Access enviroment variable in env
 const port = process.env.PORT;
 //End access enviroment variable in env
-app.set('views', './views');
+app.set('views', `${__dirname}/views`);
 app.set('view engine', 'pug');
 
 //Create static file
@@ -39,7 +39,7 @@ app.set('view engine', 'pug');
  *  + Tổ chức dễ dàng
  *  + Bảo mật: Tập tin như mã nguồn server-side và các dữ liệu nhạy cảm không được phép truy cập từ client-side
  */
-app.use(express.static('public'));
+app.use(express.static(`${__dirname}/public`));
 //End create static file
 // Method override
 app.use(methodOverride('_method')) // giá trị truyền và là _method thì lát dùng với nó
