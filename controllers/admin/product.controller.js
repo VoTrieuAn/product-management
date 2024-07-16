@@ -34,12 +34,21 @@ module.exports.index = async (req, res) => {
     const countProducts = await Product.countDocuments(find); 
     const objectPagination = paginationHelper(countProducts, 5, req.query, 1);
     //End pagination
-  
+    
+    // Sort
+    const sortOption = {}
+    if(req.query.sortKey && req.query.sortValue) {
+      sortOption[req.query.sortKey] = req.query.sortValue;
+    } else {
+      sortOption["position"] = 'desc';
+    }
+    // End sort
+
     const products = await Product.find(find)
-      .sort({position: 'desc'})
+      .sort(sortOption)
       .limit(objectPagination.limitItems)
       .skip(objectPagination.skip);
-  
+    
     res.render('admin/pages/products/index.pug', {
         pageTitle: 'Danh sách sản phẩm',
         products: products,
