@@ -3,8 +3,6 @@ const dotenv = require('dotenv');
 const database = require('./config/database.js');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
-const routesClient = require('./routes/client/index.route.js');
-const routesAdmin = require('./routes/admin/index.route.js');
 const systemConfig = require('./config/system.js');
 const flash = require('express-flash');
 const cookieParser = require('cookie-parser');
@@ -13,12 +11,15 @@ const session = require('express-session');
 dotenv.config(); //Có cái này mới chạy được env
 //End enviroment variable
 
-const app = express();
-
 //Connect database
 database.connectDatabase();
 //End connect database
 
+// Nhúng 2 cái này sau để khi chạy dotenv không cần khai báo lại
+const routesClient = require('./routes/client/index.route.js');
+const routesAdmin = require('./routes/admin/index.route.js');
+
+const app = express();
 // Access enviroment variable in env
 const port = process.env.PORT;
 //End access enviroment variable in env

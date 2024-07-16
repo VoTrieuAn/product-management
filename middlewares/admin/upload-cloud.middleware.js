@@ -1,9 +1,9 @@
 const cloudinary = require("cloudinary").v2;
 const streamifier = require("streamifier");
-const dotenv = require('dotenv');
-// Configuration cloudinary
-// dotenv phải được gọi tại nơi mình sử dụng
-dotenv.config();
+// const dotenv = require('dotenv');
+// // Configuration cloudinary
+// // dotenv phải được gọi tại nơi mình sử dụng
+// dotenv.config();
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.CLOUD_KEY,
