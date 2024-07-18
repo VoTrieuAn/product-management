@@ -7,6 +7,8 @@ const systemConfig = require('./config/system.js');
 const flash = require('express-flash');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+// Path luôn tồn tại ở project
+const path = require('path');
 //Load environment variable
 dotenv.config(); //Có cái này mới chạy được env
 //End enviroment variable
@@ -42,6 +44,10 @@ app.set('view engine', 'pug');
  */
 app.use(express.static(`${__dirname}/public`));
 //End create static file
+// Tinymce
+app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
+// End tinymce
+
 // Method override
 app.use(methodOverride('_method')) // giá trị truyền và là _method thì lát dùng với nó
 // End method override
