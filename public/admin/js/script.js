@@ -112,6 +112,7 @@ if(formChangeMulti) {
   formChangeMulti.addEventListener('submit', (event) => {
     event.preventDefault();
     //target.elemnts truy cập vào các phần tử trong form
+    // envent.target.elements.name.value
     const type = event.target.elements.type.value;
     console.log(event.target);
     if(type == 'delete-all') {
