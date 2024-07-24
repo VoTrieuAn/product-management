@@ -197,10 +197,17 @@ module.exports.edit = async (req, res) => {
       _id: id,
       deleted: false
     });
+    
+    const records = await ProductCategory.find({
+      deleted: false,
+    });
+  
+    const newRecords = createTreeHelper(records);
   
     res.render('admin/pages/products/edit.pug', {
       pageTitle: 'Chỉnh sửa sản phẩm',
-      product: product
+      product: product,
+      productCategory: newRecords
     });
   } catch (error) {
     res.redirect(`/${systemConfig.prefixAdmin}/products`);
