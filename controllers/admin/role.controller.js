@@ -58,3 +58,15 @@ module.exports.editPatch = async (req, res) => {
 
   res.redirect('back');
 }
+
+//[GET] /admin/roles/permissions
+module.exports.permissions = async (req, res) => {
+  records = await Role.find({
+    deleted: false
+  });
+
+  res.render('admin/pages/roles/permissions.pug', {
+      pageTitle: 'Phân quyền',
+      roles: records
+  });
+}
