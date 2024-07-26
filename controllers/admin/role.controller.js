@@ -70,3 +70,22 @@ module.exports.permissions = async (req, res) => {
       roles: records
   });
 }
+
+//[PATCH] /admin/roles/permissions
+module.exports.permissionsPatch = async (req, res) => {
+  const roles = JSON.parse(req.body.roles);
+  try {
+    for (const role of roles) {
+      await Role.updateOne({
+        _id: role.id,
+      }, {
+        permissions: role.permissions
+      });
+    }
+    req.flash('success', 'Cập nhật phân quyền thành công!');
+  } catch (error) {
+    req.flash('erorr', 'Cập nhật phân quyền không thành công');
+  }
+
+  res.redirect('back');
+}

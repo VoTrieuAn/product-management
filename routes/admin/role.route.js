@@ -19,4 +19,7 @@ router.patch('/edit/:_id', controller.editPatch);
 
 //[GET] /admin/roles/permissions
 router.get('/permissions', controller.permissions);
+
+//[PATCH] /admin/roles/permissions
+router.patch('/permissions', controller.permissionsPatch);
 module.exports = router;

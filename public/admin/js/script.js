@@ -235,3 +235,76 @@ if(sort) {
   }
 }
 // End sort
+
+// Permissions
+const tablePermissions = document.querySelector("[table-permissions]");
+if(tablePermissions) {
+  // Submit data
+  const buttonSubmit = document.querySelector("[button-submit]");
+  buttonSubmit.addEventListener('click', () => {
+    // Lấy ra các dòng tr có thuộc tính data-name
+    const rows = tablePermissions.querySelectorAll("[data-name]");      
+    const roles = [];
+    // Lặp qua từng dòng
+    rows.forEach(row => {
+      // Lấy ra giá trị data-name của dòng lặp qua
+      const name = row.getAttribute("data-name");
+      // Lấy ra các ô input trong dòng đó
+      const inputs = row.querySelectorAll("input");
+      // Kiểm tra xem ô đó có name là id
+      if(name == 'id') {
+        // Đúng thì lặp qua các ô input tại name = id đó
+        inputs.forEach(input => {
+          const id = input.value;
+          roles.push({
+            id: id,
+            permissions: []
+          });
+        });
+      } else {
+        // Không thì lặp qua các ô input và kiểm tra xem nó đã được checked hay chưa
+        inputs.forEach((input, index) => {
+          if(input.checked) {
+            // Nếu đã được check thì push vào mảng permission tại vị trí index của từng ô input trên 1 dòng
+            roles[index].permissions.push(name);
+          }
+        });
+      }
+    });
+    // Lấy ra form đã được định nghĩa sẵn
+    const formChangePermissions = document.querySelector("[form-change-permissions]");
+    // Lấy ra ôn input trong form đó
+    const inputRoles = formChangePermissions.querySelector("input[name=roles]");
+    // Gán giá trị của mảng roles vào ô input đó (phải chuyển sang JSON)
+      // Note: JSON.parse() dùng hàm này để format lại giá trị ban đầu
+    inputRoles.value = JSON.stringify(roles);
+    // Submit form đó
+    formChangePermissions.submit();
+  });
+  // End submit data
+
+  // Show data default
+  // Lấy ra thẻ div có data-roles được chuẩn bị sẵn
+  const divRoles = document.querySelector("[data-roles]");
+  if(divRoles) {
+    // Lấy ra giá trị trong thuộc tính data-roles (giá trị là các document roles được trả về từ backend và gửi lên frontend) sau đó parse lại chuỗi JSON thành ARRAY
+    const records = JSON.parse(divRoles.getAttribute("data-roles"));
+    // Lặp qua từng phần tử trong mảng
+    records.forEach((record, index) => {
+      // Lấy ra các array permissions của từng phần tử mảng
+      const permissions = record.permissions;
+      // Lặp qua các phần tử trong permissions
+      permissions.forEach((permission) => {
+        // Lấy ra các dòng có data-name với value là các giá trị có trong permissions
+        const row = tablePermissions.querySelector(`[data-name=${permission}]`);
+        // Lấy ra các ô input tại vị trí index của các ô input trên 1 dòng
+        const input = row.querySelectorAll("input")[index];
+        // Cho thuộc tính checked = true
+        input.checked = true;
+      });
+    });
+    
+  }
+  // End data default
+}
+// End permissions
