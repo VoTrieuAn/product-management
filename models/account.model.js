@@ -4,7 +4,8 @@ const accountSchema = new mongoose.Schema({
   fullname: String,
   email: String,
   password: String,
-  token: String,
+  // Luôn luôn có và là mã duy nhất để sau này đăng nhập sẽ lưu mã đó lại
+  token: String, 
   phone: String,
   avatar: String,
   role_id: String,
