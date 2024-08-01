@@ -25,10 +25,16 @@ module.exports = (app) => {
 
   app.use(
     `${PATH_ADMIN}/products-category`, 
-    authMiddleware.requireAuth,productCategoryRoute);
-    app.use(`${PATH_ADMIN}/roles`, roleRoute
+    authMiddleware.requireAuth,
+    productCategoryRoute
   );
-
+  
+  app.use(
+    `${PATH_ADMIN}/roles`,
+    authMiddleware.requireAuth,
+    roleRoute
+  );
+    
   app.use(
     `${PATH_ADMIN}/accounts`, 
     authMiddleware.requireAuth,

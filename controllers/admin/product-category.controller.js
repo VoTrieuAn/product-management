@@ -27,22 +27,29 @@ module.exports.create = async (req, res) => {
 
 //[POST] /admin/products-category/create
 module.exports.createPost = async (req, res) => {
-  const position = req.body.position
-  if(position == '') {
-    const countProduct = await ProductCategory.countDocuments();
-    req.body.position = countProduct + 1
+  // Trước khi thêm mới danh mục phải check xem cái role bên res.locals.role có tồn tại products-category_create hay không. Để bảo mật hơn tránh họ dùng postman để check
+  const productCreate = res.locals.role.permissions.includes('products_create');
+  if(productCreate) {
+    const position = req.body.position
+    if(position == '') {
+      const countProduct = await ProductCategory.countDocuments();
+      req.body.position = countProduct + 1
+    } else {
+      req.body.position = parseInt(position);
+    }
+  
+    const record = new ProductCategory(req.body);
+  
+    //Lưu sản phẩm vừa tạo
+    await record.save();
+  
+    req.flash('success', 'Thêm mới danh mục sản phẩm thành công!');
+  
+    res.redirect(`/${systemConfig.prefixAdmin}/products-category`);
   } else {
-    req.body.position = parseInt(position);
+    // Đây là trường hợp có người hack
+    res.send("403");
   }
-
-  const record = new ProductCategory(req.body);
-
-  //Lưu sản phẩm vừa tạo
-  await record.save();
-
-  req.flash('success', 'Thêm mới danh mục sản phẩm thành công!');
-
-  res.redirect(`/${systemConfig.prefixAdmin}/products-category`);
 }
 
 // [GET] /admin/products-category/edit/:_id
