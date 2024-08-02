@@ -80,10 +80,16 @@ module.exports.changeState = async (req, res) => {
   const status = req.params.status;
   const id = req.params._id;
 
+  const objectUpdatedBy = {
+    accountId: res.locals.user.id,
+    updatedAt: new Date()
+  }
+
   await Product.updateOne({
     _id: id //Điều kiện tìm kiếm
   }, {
-    status: status // Key thay đổi với giá trị mới của key
+    status: status, // Key thay đổi với giá trị mới của key
+    $push: { updatedBy: objectUpdatedBy }
   });
 
   // Back về trang products
@@ -248,10 +254,21 @@ module.exports.editPatch = async (req, res) => {
       req.body.thumbnail = `/uploads/${req.file.filename}`;
     }
     
+    const objectUpdatedBy = {
+      accountId: res.locals.user.id,
+      updatedAt: new Date()
+    }
+
     // Cập hật sản phẩm
     await Product.updateOne({
       _id: id
-    }, req.body);
+    }, {
+      /**
+       * ...req.body: Dùng để giải nén các thuộc tính của object req.body có dạng {field: value} => giải nén thành field: value (bỏ dấu ngoặc kép)
+       *  */ 
+      ...req.body,
+      $push: { updatedBy: objectUpdatedBy }
+    });
     
     req.flash('success', 'Cập nhật sản phẩm thành công!');
   } catch (error) {

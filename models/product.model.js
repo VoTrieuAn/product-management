@@ -40,7 +40,11 @@ const productSchema = new mongoose.Schema({
   deletedBy: {
     accountId: String,
     deletedAt: Date
-  }
+  },
+  updatedBy: [{
+    accountId: String,
+    updatedAt: Date
+  }]
 }, {
   timestamps: true // key của mongoose
 });
