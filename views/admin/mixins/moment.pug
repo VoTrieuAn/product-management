@@ -1,0 +1,13 @@
+//- hh: định dạng giờ theo 12 giờ
+//- HH: định dạng giờ geho 24 giờ
+mixin formatDateTime(time)
+  p #{moment(time).format("DD/MM/YYYY HH:mm:ss")}
+
+mixin formatDate()
+  p #{moment(time).format("DD/MM/YYYY")}
+  
+mixin formatTime24()
+  p #{moment(time).format("HH:mm:ss")}
+
+mixin formatTime12()
+  p #{moment(time).format("hh:mm:ss")}

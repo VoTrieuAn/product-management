@@ -32,7 +32,11 @@ const productSchema = new mongoose.Schema({
     type: Boolean, // Kiểu dữ liệu
     default: false // Giá trị mặc định
   },
-  deletedAt: Date
+  deletedAt: Date,
+  createdBy: {
+    accountId: String,
+    createdAt: Date
+  }
 }, {
   timestamps: true // key của mongoose
 });

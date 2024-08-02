@@ -7,6 +7,7 @@ const systemConfig = require('./config/system.js');
 const flash = require('express-flash');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const moment = require('moment');
 // Path luôn tồn tại ở project
 const path = require('path');
 //Load environment variable
@@ -73,6 +74,7 @@ routesAdmin(app);
 //App local variables
     // app.locals.<name> = <value>
 app.locals.prefixAdmin = systemConfig.prefixAdmin //Tạo ra một biến local dùng ở bất cứ đâu kể cả file pug
+app.locals.moment = moment;
 
 //End dip routes
 app.listen(port, () => {

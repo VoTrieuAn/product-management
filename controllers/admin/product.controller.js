@@ -1,6 +1,7 @@
 //[GET] /admin/products/
 const Product = require("../../models/product.model");
 const ProductCategory = require("../../models/product-category.model");
+const Account = require("../../models/account.model");
 const systemConfig = require('../../config/system');
 const filterStateHelper = require('../../helpers/filter-state.helper');
 const paginationHelper = require('../../helpers/pagination.helper');
@@ -51,7 +52,16 @@ module.exports.index = async (req, res) => {
       .sort(sortOption)
       .limit(objectPagination.limitItems)
       .skip(objectPagination.skip);
-    
+  
+    for (const product of products) {
+      const account = await Account.findOne({
+        _id: product.createdBy.accountId
+      });
+      if(account) {
+        product.createdBy.fullname = account.fullname;
+      }
+    }
+
     res.render('admin/pages/products/index.pug', {
         pageTitle: 'Danh sách sản phẩm',
         products: products,
@@ -174,9 +184,11 @@ module.exports.createPost = async (req, res) => {
     req.body.position = parseInt(position);
   }
 
-  // req.file is the `thumbnail` file
   // req.body will hold the text fields, if there were any
-
+  req.body.createdBy = {
+    accountId: res.locals.user.id,
+    createdAt: new Date()
+  }
   //Tạo mới một sản phẩm từ model
   const product = new Product(req.body);
 
