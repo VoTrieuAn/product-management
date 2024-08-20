@@ -1,6 +1,7 @@
 // Nhiệm vụ chứa hàm controller của các route product
 const Product = require('../../models/product.model');
-const ProductCategory = require('../../models/product-category.model')
+const ProductCategory = require('../../models/product-category.model');
+const { all } = require('../../routes/client/product.route');
 //[GET]: /products/
     //Thường trang danh sách sản phẩm đặt tên là index
 module.exports.index = async (req, res) => { 
@@ -30,8 +31,34 @@ module.exports.category = async (req, res) => {
       deleted: false
     });
     
+    const getSubCategory = async (parentId) => {
+        const subs = await ProductCategory.find({
+            parent_id: parentId,
+            status: 'active',
+            deleted: false
+        });
+        
+        let allSubs = [...subs];
+
+        for(const sub of subs) {
+            const childs = await getSubCategory(sub.id);
+            console.log(childs);
+            allSubs = allSubs.concat(childs);
+        }
+        return allSubs;
+    }
+
+    const allCategory = await getSubCategory(category.id);
+
+    const allCategoryId = allCategory.map(category => category.id);
+
     const products = await Product.find({
-      productCategoryId: category.id,
+      productCategoryId: {
+        $in: [
+            category.id,
+            ...allCategoryId
+        ]
+      },
       status: 'active',
       deleted: false
     });
