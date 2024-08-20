@@ -1,11 +1,14 @@
 //Nhiệm vụ chứa các routes của product
 const express = require('express');
 const router = express.Router();
-const productControllers = require('../../controllers/client/product.controller');
+const controller = require('../../controllers/client/product.controller');
 
-router.get('/', productControllers.index);
+router.get('/', controller.index);
 
-router.get('/:slug', productControllers.detail);
+//[GET]: /products/:slugCategory
+router.get('/:slugCategory', controller.category)
+
+// router.get('/:slug', productControllers.detail);
 
 // router.get('/edit', productControllers.edit);
 
