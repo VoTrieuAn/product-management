@@ -80,14 +80,24 @@ module.exports.category = async (req, res) => {
 module.exports.detail = async (req, res) => {
   // Để web có tính SEO thì không back về trang 404 mà back về trang chủ
   try {
-      const slug = req.params.slug;
+      const slug = req.params.slugProduct;
       
       const product = await Product.findOne({
           slug: slug,
           deleted: false,
           status: 'active'
       });
-  
+      
+      product.priceNew = (product.price * (100 - product.discountPercentage) / 100).toFixed(0);
+
+      if(product.productCategoryId) {
+        const category = await ProductCategory.findOne({
+            id: product.productCategoryId
+        });
+
+        product.category = category;
+      }
+
       res.render('client/pages/products/detail.pug', {
           pageTitle: product.title,
           product: product
