@@ -1,7 +1,6 @@
 // Nhiệm vụ chứa hàm controller của các route product
 const Product = require('../../models/product.model');
 const ProductCategory = require('../../models/product-category.model');
-const { all } = require('../../routes/client/product.route');
 //[GET]: /products/
     //Thường trang danh sách sản phẩm đặt tên là index
 module.exports.index = async (req, res) => { 
