@@ -11,4 +11,7 @@ router.post('/add/:productId', controller.addPost);
 // [GET] /cart/delete/:productId
 router.get('/delete/:productId', controller.delete);
 
+// [GET] /cart/update/:productId/:quantity
+router.get('/update/:productId/:quantity', controller.update);
+
 module.exports = router;
