@@ -54,7 +54,8 @@ block main
                       class="btn btn-danger"
                     ) Xóa 
             else
-              tr(colspan="7") Chưa có sản phẩm nào!  
+              tr
+                td(colspan="7")  Chưa có sản phẩm nào!  
         h3(class="text-right") Tổng đơn hàng: <span class="text-danger">#{cartDetail.totalPrice}$</span>
 
         div(class="text-right mt-3")
