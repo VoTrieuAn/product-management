@@ -1,14 +1,11 @@
 const mongoose = require('mongoose');
-const generate = require('../helpers/generate.helper');
 
 const userSchema = new mongoose.Schema({
   fullName: String,
   email: String,
   password: String,
-  tokenUser: {
-    type: String,
-    default: generate.generateRandomString(20)
-  },
+  // Để default ở generate ở đây nó chỉ tạo ra một lần đến các tài khoản khác thì nó bị trùng token
+  tokenUser: String,
   phone: String,
   avatar: String,
   status: {

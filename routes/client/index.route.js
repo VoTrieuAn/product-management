@@ -4,6 +4,7 @@ const homeRoute = require('./home.route');
 const searchRoute = require('./search.route');
 const cartRoute = require('./cart.route');
 const checkoutRoute = require('./checkout.route');
+const userRoute = require('./user.route');
 const categoryMiddleware = require('../../middlewares/client/category.middleware');
 const cartMiddleware = require('../../middlewares/client/cart.middleware');
 module.exports = (app) => { //Cách export trong node js
@@ -21,6 +22,8 @@ module.exports = (app) => { //Cách export trong node js
   app.use("/cart", cartRoute);
 
   app.use("/checkout", checkoutRoute);
+
+  app.use("/user", userRoute);
 }
 /**
  * Không nên ghi ra các tên phương thức cụ thể get, put, patch vì các con sẽ ăn theo

@@ -3,7 +3,7 @@ include ../mixins/sub-menu
 header.header
   .container 
     .row.align-items-center 
-      .col-3 
+      .col-2 
         .inner-logo 
           a(href="/")
             img(src="/images/logo.svg", alt="Logo")
@@ -24,7 +24,7 @@ header.header
               type="submit"
               class="btn btn-primary"
             ) Tìm
-      .col-4 
+      .col-5
         .inner-menu 
           ul
             li 
@@ -35,3 +35,5 @@ header.header
                 +sub-menu(layoutCategoryProducts)
             li
               a(href="/cart") Giỏ hàng (#{cart ? cart.products.length : 0})
+            li
+              a(href="/user/register") Đăng ký
