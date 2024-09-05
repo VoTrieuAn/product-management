@@ -25,4 +25,14 @@ router.post(
 // [GET] /user/logout
 router.get('/logout', controller.logout);
 
+// [GET] /user/password/forgot
+router.get('/password/forgot', controller.forgotPassword);
+
+// [POST] /user/password/forgot
+router.post(
+  '/password/forgot',
+  userValiadate.forgotPasswordPost,
+  controller.forgotPasswordPost
+);
+
 module.exports = router;
