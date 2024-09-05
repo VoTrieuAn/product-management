@@ -44,4 +44,14 @@ router.post(
   controller.otpPasswordPost
 );
 
+// [GET] /user/password/reset
+router.get('/password/reset', controller.resetPassword);
+
+// [POST] /user/password/reset
+router.post(
+  '/password/reset',
+  userValiadate.resetPasswordPost,
+  controller.resetPasswordPost
+);
+
 module.exports = router;
