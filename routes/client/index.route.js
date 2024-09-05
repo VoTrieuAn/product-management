@@ -7,11 +7,14 @@ const checkoutRoute = require('./checkout.route');
 const userRoute = require('./user.route');
 const categoryMiddleware = require('../../middlewares/client/category.middleware');
 const cartMiddleware = require('../../middlewares/client/cart.middleware');
+const userMiddleware = require('../../middlewares/client/user.middleware');
 module.exports = (app) => { //Cách export trong node js
   // Khi viết ở đây các trang sẽ chạy qua middleware category trước vì category này không cần bảo mật => Đảm bảo các router đều chạy qua middleware này
   app.use(categoryMiddleware.category);
 
-  app.use(cartMiddleware.cart)
+  app.use(cartMiddleware.cart);
+
+  app.use(userMiddleware.infoUser,);
 
   app.use('/', homeRoute);
 

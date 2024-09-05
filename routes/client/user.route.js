@@ -9,6 +9,17 @@ router.get('/register', controller.register);
 router.post(
   '/register', 
   userValiadate.registerPost,
-  controller.registerPost);
+  controller.registerPost
+);
+
+// [GET] /user/login
+router.get('/login', controller.login);
+
+// [POST] /user/login
+router.post(
+  '/login',
+  userValiadate.loginPost,
+  controller.loginPost
+);
 
 module.exports = router;
