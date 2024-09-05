@@ -35,4 +35,13 @@ router.post(
   controller.forgotPasswordPost
 );
 
+// [GET] /user/password/otp
+router.get('/password/otp', controller.otpPassword);
+
+// [POST] /user/password/otp
+router.post(
+  '/password/otp',
+  controller.otpPasswordPost
+);
+
 module.exports = router;
