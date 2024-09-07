@@ -66,10 +66,21 @@ app.use(bodyParser.urlencoded({ extended: false }))
     app.use(flash());
 // End flash message
 
-//Dip routes
+//Dip routes client
 routesClient(app);
+
+//Dip routes admin
 routesAdmin(app);
-//End dip routes
+
+// 404 Not Found
+app.get("*", (req, res) => {
+    // C1: Trở về trang chủ (Đây là cách các ông sale web hay dùng)
+    // res.redirect("/");
+    // C2: Đi tới trang 404
+    res.render("client/pages/errors/404.pug", {
+        pageTitle: "404 Not Found",
+    });
+});
 
 //App local variables
     // app.locals.<name> = <value>
