@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const controller = require('../../controllers/client/user.controller');
 const userValiadate = require('../../validates/client/user.validate');
+const authMiddleware = require('../../middlewares/client/auth.middleware');
 // [GET] /user/register
 router.get('/register', controller.register);
 
@@ -52,6 +53,14 @@ router.post(
   '/password/reset',
   userValiadate.resetPasswordPost,
   controller.resetPasswordPost
+);
+
+// [GET] /user/info
+router.get(
+  '/info', 
+  // Đây là 1 route private
+  authMiddleware.requireAuth,
+  controller.info
 );
 
 module.exports = router;
