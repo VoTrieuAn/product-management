@@ -14,7 +14,7 @@ module.exports = (app) => { //Cách export trong node js
 
   app.use(cartMiddleware.cart);
 
-  app.use(userMiddleware.infoUser,);
+  app.use(userMiddleware.infoUser);
 
   app.use('/', homeRoute);
 
